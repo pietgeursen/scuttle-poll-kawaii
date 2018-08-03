@@ -14,12 +14,16 @@ function App (cb) {
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
   app.use(cookieParser())
+  app.get('/', function (req, res) {
+    res.redirect('/polls')
+  })
   app.use(express.static(path.join(__dirname, 'public')))
 
   var poll = Poll(sbot)
   var indexRouter = IndexRouter(sbot, poll)
 
   app.use('/polls', indexRouter)
+
   cb(null, app)
 }
 

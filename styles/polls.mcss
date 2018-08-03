@@ -1,3 +1,10 @@
+h1 {
+  color: deeppink
+}
 Polls {
   font-family: cursive 
+}
+
+body {
+  background: lightpink
 }
