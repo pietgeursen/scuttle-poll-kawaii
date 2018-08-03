@@ -18,10 +18,10 @@ function createRouter (sbot, poll) {
           [
             h('h1', 'Polls'),
             h('span', [
-              h('a', {href: '/polls?filter=all'}, 'all'),
-              h('a', {href: '/polls?filter=open'}, 'open'),
-              h('a', {href: '/polls?filter=closed'}, 'closed'),
-              h('a', {href: '/polls?filter=mine'}, 'mine')
+              Link('all'),
+              Link('open'),
+              Link('closed'),
+              Link('mine'),
             ]),
             h('div.polls', polls.map(Poll))
           ]
@@ -29,6 +29,15 @@ function createRouter (sbot, poll) {
         res.send(render(content))
       })
     )
+
+    function Link (name) {
+      const filter = req.query.filter || 'all'
+      return h('a', {
+        href: `/polls?filter=${name}`,
+        className: filter === name ? '-active' : '' },
+        name
+      )
+    }
   })
 }
 

@@ -1,10 +1,42 @@
-h1 {
-  color: deeppink
-}
 Polls {
+  max-width: 60rem
+  margin: 0 auto
+
   font-family: cursive 
+
+  h1 {
+    color: deeppink
+    font-size: 5rem
+  }
+
+  span {
+    display: grid
+    grid-gap: 2rem
+    grid-template-columns: auto auto auto auto
+
+    justify-content: start
+
+    margin-bottom: 2rem
+
+    a {
+      color: purple
+      text-transform: uppercase
+      font-weight: 600
+      letter-spacing: 5px
+      text-decoration: none
+
+      padding-bottom: .5rem
+      border-bottom: 2px solid rgba(0,0,0,0)
+
+      -active {
+        border-bottom: 2px solid purple
+      }
+    }
+  }
+
+  div.polls {
+    display: grid
+    grid-gap: .5rem
+  }
 }
 
-body {
-  background: lightpink
-}

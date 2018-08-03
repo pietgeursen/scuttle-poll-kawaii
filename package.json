@@ -28,5 +28,9 @@
     "ssb-private": "0.2.3",
     "ssb-query": "2.1.0",
     "ssb-serve-blobs": "1.0.0"
+  },
+  "devDependencies": {
+    "micro-css": "^2.0.1",
+    "nodemon": "^1.18.3"
   }
 }

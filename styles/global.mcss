@@ -1,0 +1,11 @@
+html {
+  --pinkGrad: linear-gradient(to right, blue 15%, pink 50%, blue 85%)
+  --sparkles: url('/sparkles.gif')
+
+  background: var(--pinkGrad), var(--sparkles)
+  background-blend-mode: color-dodge
+}
+
+body {
+}
+

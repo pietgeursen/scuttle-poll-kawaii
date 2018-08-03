@@ -1,3 +1,8 @@
-.Polls { font-family: cursive; }
-h1 { color: deeppink; }
-body { background: lightpink; }
+.Poll { color: deeppink; }
+.Polls { max-width: 60rem; margin: 0 auto; font-family: cursive; }
+.Polls > h1 { color: deeppink; font-size: 5rem; }
+.Polls > span { display: grid; grid-gap: 2rem; grid-template-columns: auto auto auto auto; justify-content: start; margin-bottom: 2rem; }
+.Polls > span > a { color: purple; text-transform: uppercase; font-weight: 600; letter-spacing: 5px; text-decoration: none; padding-bottom: .5rem; border-bottom: 2px solid rgba(0,0,0,0); }
+.Polls > span > a.-active { border-bottom: 2px solid purple; }
+.Polls > div.polls { display: grid; grid-gap: .5rem; }
+html { --pinkGrad: linear-gradient(to right, blue 15%, pink 50%, blue 85%); --sparkles: url('/sparkles.gif'); background: var(--pinkGrad), var(--sparkles); background-blend-mode: color-dodge; }
