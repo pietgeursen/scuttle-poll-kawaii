@@ -6,7 +6,12 @@ var render = require('../views/')
 var Polls = require('../views/polls')
 
 function createRouter (sbot, poll) {
-  return router.get('/', function (req, res, next) {
+  router.get('/:id', function (req, res, next) {
+    console.log('need to get poll with ', req.params)
+    res.send(String(req.params))
+  })
+
+  router.get('/', function (req, res, next) {
     pull(
       // TODO: make the query filter not blow up the poll.poll.pull. thing
       poll.poll.pull[req.query.filter || 'all']({reverse: true, live: false}),
@@ -15,7 +20,7 @@ function createRouter (sbot, poll) {
       pull.collect(renderPolls)
     )
     function renderPolls (err, polls) {
-      // if (err) { return 500 }
+      // if (err) { return res.send(500)}
       console.log(err)
       res.send(render(Polls(polls)))
     }
@@ -24,6 +29,8 @@ function createRouter (sbot, poll) {
   function getPoll (msg, cb) {
     poll.poll.async.get(msg.key, cb)
   }
+
+  return router
 }
 
 module.exports = createRouter

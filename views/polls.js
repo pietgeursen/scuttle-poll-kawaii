@@ -24,8 +24,11 @@ function Link (name, filter) {
   name
   )
 }
+
 function PollSummary (poll) {
   return h('div.Poll', [
-    h('div.title', poll.title)
+    h('div.title',
+      h('a', {href: `/polls/${poll.key}`}, poll.title)
+    )
   ])
 }
