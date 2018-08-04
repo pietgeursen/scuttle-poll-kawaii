@@ -1,4 +1,5 @@
 var h = require('hyperscript')
+var {keyToBase64} = require('../lib/key-to-base64.js')
 
 module.exports = function Polls (polls, filter) {
   return h('div.Polls',
@@ -26,9 +27,10 @@ function Link (name, filter) {
 }
 
 function PollSummary (poll) {
+  var encodedKey = keyToBase64(poll.key)
   return h('div.Poll', [
     h('div.title',
-      h('a', {href: `/polls/${poll.key}`}, poll.title)
+      h('a', {href: `/polls/${encodedKey}`}, poll.title)
     )
   ])
 }
