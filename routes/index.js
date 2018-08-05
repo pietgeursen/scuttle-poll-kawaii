@@ -1,7 +1,6 @@
 var express = require('express')
 var router = express.Router()
 var pull = require('pull-stream')
-var h = require('hyperscript')
 
 var render = require('../views/')
 var {Polls, PollShow, PollNew} = require('../views/polls')
@@ -20,6 +19,7 @@ function createRouter (sbot, poll) {
   router.post('/', function (req, res) {
 
   })
+
   router.get(editOrNewRegex, function (req, res, next) {
     var encodedPollKey = req.params.id
 

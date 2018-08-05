@@ -55,14 +55,22 @@ function PollNew (pollType) {
 
   return renderer ? renderer() : defaultRenderer()
 }
+
 function PollShow (poll, encodedPollKey) {
   var myPosition = poll.myPosition
+  var choices = poll.value.content.details.choices
 
   return h('div.Poll', [
     h('div.title',
       h('h1', poll.title)
     ),
     h('div.body', poll.body),
+    h('div.choices', [
+      h('h2', 'Choices: '),
+      choices.map(function (choice) {
+        return h('div.choice', choice)
+      })
+    ]),
     editOrCreatePosition(myPosition),
     h('section.PollResults', [
       h('h3', 'Current Results'),
