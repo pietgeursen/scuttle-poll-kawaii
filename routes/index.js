@@ -1,14 +1,25 @@
 var express = require('express')
 var router = express.Router()
 var pull = require('pull-stream')
+var h = require('hyperscript')
 
 var render = require('../views/')
-var {Polls, PollShow} = require('../views/polls')
+var {Polls, PollShow, PollNew} = require('../views/polls')
 var { PositionEdit } = require('../views/positions')
 var {base64ToKey} = require('../lib/key-to-base64.js')
 
+var editOrNewRegex = '/:id/positions/edit|/:id/positions/new'
+
 function createRouter (sbot, poll) {
-  var editOrNewRegex = '/:id/positions/edit|/:id/positions/new'
+  router.get('/new', function (req, res) {
+    var pollType = req.query.type
+    var elem = PollNew(pollType)
+    res.send(render(elem))
+  })
+
+  router.post('/', function (req, res) {
+
+  })
   router.get(editOrNewRegex, function (req, res, next) {
     var encodedPollKey = req.params.id
 

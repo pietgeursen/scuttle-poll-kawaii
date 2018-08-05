@@ -3,9 +3,58 @@ var {keyToBase64} = require('../lib/key-to-base64.js')
 
 module.exports = {
   Polls,
-  PollShow
+  PollShow,
+  PollNew
 }
 
+function PollNew (pollType) {
+  var renderers = {
+    chooseOne
+  }
+
+  function chooseOne () {
+    return h('h1', [
+      'Create a new Choose One poll',
+      h('form', {}, [
+        h('input', {type: 'text'})
+      ])
+    ])
+  }
+
+  function defaultRenderer () {
+    return h('div', [
+      h('h1', 'What sort of Poll would you like to create?'),
+      h('div.pollDescription', [
+        h('h2', [
+          h('a', {href: '/polls/new?type=chooseOne'}, 'Choose One')
+        ]),
+        h('p', 'A poll with multiple choices. Participants must choose only one of the options.')
+      ]),
+      h('div.pollDescription', [
+        h('h2', [
+          h('a', {href: '/polls/new?type=dot'}, 'Dot vote')
+        ]),
+        h('p', 'A poll with multiple choices. Participants have a fixed number of votes which they spread across the options.')
+      ]),
+      h('div.pollDescription', [
+        h('h2', [
+          h('a', {href: '/polls/new?type=range'}, 'Range Vote')
+        ]),
+        h('p', 'A poll with multiple choices. Participants give each option a score according to their relative preference.')
+      ]),
+      h('div.pollDescription', [
+        h('h2', [
+          h('a', {href: '/polls/new?type=proposal'}, 'Proposal')
+        ]),
+        h('p', 'A poll with one choice. Participants can agree, disagree, abstain or block.')
+      ])
+    ])
+  }
+
+  var renderer = renderers[pollType]
+
+  return renderer ? renderer() : defaultRenderer()
+}
 function PollShow (poll, encodedPollKey) {
   var myPosition = poll.myPosition
 
@@ -49,6 +98,9 @@ function Polls (polls, filter) {
   return h('div.Polls',
     [
       h('h1', 'Polls'),
+      h('div.new', [
+        h('a', {href: '/polls/new'}, 'Create a new poll')
+      ]),
       h('span', [
         Link('all'),
         Link('open'),
