@@ -16,8 +16,29 @@ function createRouter (sbot, poll) {
     res.send(render(elem))
   })
 
-  router.post('/', function (req, res) {
+  router.post('/:id/positions', function (req, res) {
+    var encodedPollKey = req.params.id
+    pull(
+      pull.once(encodedPollKey),
+      pull.map(base64ToKey),
+      pull.asyncMap(poll.poll.async.get),
+      pull.asyncMap(function (thisPoll, cb) {
+        var choice = Number(req.body.choice)
+        var reason = req.body.reason
 
+        // TODO: ideally we'll use poll.actions.publishPosition in the future. It has a bug at the moment tho.
+        var pollType = thisPoll.type
+        if (pollType === 'chooseOne') {
+          poll.position.async.publishChooseOne({poll: thisPoll, choice, reason}, cb)
+        } else {
+          cb(new Error('Only chooseOne Positions at the moment'))
+        }
+      }),
+      pull.drain(function (poll) {
+        console.log('published position ok')
+        res.redirect(`/polls/${req.params.id}`)
+      })
+    )
   })
 
   router.get(editOrNewRegex, function (req, res, next) {

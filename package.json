@@ -14,7 +14,7 @@
     "hyperscript": "^2.0.2",
     "morgan": "~1.9.0",
     "pull-stream": "^3.6.8",
-    "scuttle-poll": "^1.2.0",
+    "scuttle-poll": "^1.2.1",
     "scuttle-shell": "0.0.3",
     "scuttlebot": "^11.3.3",
     "ssb-about": "0.1.2",
